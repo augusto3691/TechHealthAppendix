@@ -1,12 +1,6 @@
 // app/api/analyze/route.ts
+import llm from "@/lib/llm";
 import { NextRequest, NextResponse } from "next/server";
-import { ChatAnthropic } from "@langchain/anthropic";
-
-const llm = new ChatAnthropic({
-  model: "claude-3-haiku-20240307",
-  temperature: 1,
-  maxRetries: 2,
-});
 
 export async function POST(req: NextRequest) {
   try {

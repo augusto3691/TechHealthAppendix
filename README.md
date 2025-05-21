@@ -1,36 +1,30 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# Tech Health Appendix Generator
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+![hero](hero.gif)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+## 📌 Overview
 
-To learn more about Next.js, take a look at the following resources:
+Generates a technical appendix with code analysis and metrics, ideal for pitching early-stage startups. It uses Langchain behind the scene to orchestrate the model invocation and a public Github API to generate data to prompt the models.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ⚙️ Tecnologias utilizadas
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Nextjs, tailwind and shadcn for frontend (Due to rapid prototyping and code consistency)
+- Axios for API calls (More verbose and opinionated than fetchter)
+- Langchain for Model calls (Pretty much the standard for model orchestration and would give me the flexibility to choose which model of which integration to use.)
 
-## Deploy on Vercel
+## 🧠 How i used AI
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Generate a base data from Github API and use that data to compose a prompt engineering and invoke that using langchain, besides that i use a deepseek along the development to improove performance on types and util libs.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## How your solution addresses the core problem
+
+Basically the system use a repo name to gather some metadatas from that and send to a model create a technical appendix that has a strong tendency to be textual and audits a codebase to build investor confidence.
+
+## ⏱️ Tempo total
+
+4h15min (detalhar o tempo por fase, se possível)

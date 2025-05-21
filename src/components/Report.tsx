@@ -1,20 +1,20 @@
 import { CircleCheck, CircleX, Star } from "lucide-react";
+import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
 } from "./ui/card";
 import { Table, TableBody, TableCell, TableRow } from "./ui/table";
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 
 import numeral from "numeral";
 import {
-  ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
+    ChartConfig,
+    ChartContainer,
+    ChartTooltip,
+    ChartTooltipContent,
 } from "./ui/chart";
 
 const chartConfig = {
