@@ -1,25 +1,36 @@
-'use client'
+"use client";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useEffect } from "react";
+import api from "@/lib/api";
+import { Loader2 } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
 
 export default function Home() {
+  const [repoData, setRepoData] = useState<any>(null);
+  const [repoUrl, setRepoUrl] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
   const analyzeRepo = async (repoUrl: string) => {
-    const res = await fetch("/api/analyze", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ repoUrl }),
-    });
+    setLoading(true);
 
-    if (!res.ok) throw new Error("Falha ao analisar repositório");
-
-    const data = await res.json();
-    return data;
+    try {
+      const { data } = await api.post("/analyze", { repoUrl });
+      setRepoData(data);
+    } catch (error) {
+      toast.error(
+        "We canot find any information about this repository. Please try again.",
+        {
+          position: "top-center",
+        }
+      );
+    } finally {
+      setLoading(false);
+    }
   };
-  
+
   return (
     <main className="flex flex-col items-center justify-center h-screen">
       <h2 className="bg-clip-text text-transparent text-center bg-gradient-to-b from-neutral-900 to-neutral-700 dark:from-neutral-600 dark:to-white text-2xl md:text-4xl lg:text-7xl font-sans py-2 md:py-10 relative z-20 font-bold tracking-tight">
@@ -35,10 +46,19 @@ export default function Home() {
       </p>
       <div className="container flex gap-3 items-center justify-center">
         <Input
+          value={repoUrl}
           className="w-1/2 md:w-1/2 mt-4"
           placeholder="https://github.com/owner/repo"
+          onChange={(e) => setRepoUrl(e.target.value)}
         />
-        <Button className="mt-4">Generate Report</Button>
+        <Button
+          disabled={loading}
+          onClick={() => analyzeRepo(repoUrl)}
+          className="mt-4"
+        >
+          {loading && <Loader2 className="animate-spin" />}
+          Generate Report
+        </Button>
       </div>
     </main>
   );
